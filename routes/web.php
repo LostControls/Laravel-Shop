@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 //首页
 Route::get('/', 'PagesController@root')->name('root')->middleware('verified');
 
+Route::get('products/favorites', 'ProductsController@favorites')->name('products.favorites');
+
+
 Auth::routes(['verify' => true]);
 
 // auth 中间件代表需要登录，verified中间件代表需要经过邮箱的验证
@@ -43,6 +46,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::post('products/{product}/favorite','ProductsController@favor')->name('products.favor');
     //取消商品收藏
     Route::delete('products/{product}/favorite','ProductsController@disfavor')->name('products.disfavor');
+
 });
 
 
