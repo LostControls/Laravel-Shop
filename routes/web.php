@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth','verified']], function () {
     //取消商品收藏
     Route::delete('products/{product}/favorite','ProductsController@disfavor')->name('products.disfavor');
 
+    //添加商品
+    Route::post('cart', 'CartController@add')->name('cart.add');
 });
 
 

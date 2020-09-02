@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class ProductSku extends Model
 {
@@ -12,4 +13,9 @@ class ProductSku extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+//    public function cartItem()
+//    {
+//        return $this->hasMany(Carbon::class);
+//    }
 }
