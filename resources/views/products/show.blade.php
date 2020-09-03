@@ -79,25 +79,6 @@
 
             // 监听收藏按钮的点击事件
             $('.btn-favor').click(function () {
-                // 发起一个 post ajax 请求，请求 url 通过后端的 route() 函数生成。
-                axios.post('{{ route('products.favor', ['product' => $product->id]) }}')
-                    .then(function () { // 请求成功会执行这个回调
-                        swal('操作成功', '', 'success');
-                    }, function(error) { // 请求失败会执行这个回调
-                        // 如果返回码是 401 代表没登录
-                        if (error.response && error.response.status === 401) {
-                            swal('请先登录', '', 'error');
-                        } else if (error.response && (error.response.data.msg || error.response.data.message)) {
-                            // 其他有 msg 或者 message 字段的情况，将 msg 提示给用户
-                            swal(error.response.data.msg ? error.response.data.msg : error.response.data.message, '', 'error');
-                        }  else {
-                            // 其他情况应该是系统挂了
-                            swal('系统错误', '', 'error');
-                        }
-                    });
-            });
-
-            $('.btn-favor').click(function () {
                 axios.post('{{ route('products.favor', ['product' => $product->id]) }}')
                     .then(function () {
                         swal('操作成功', '', 'success')
@@ -134,7 +115,7 @@
                     amount: $('.cart_amount input').val(),
                 })
                     .then(function () { // 请求成功执行此回调
-                        swal('加入购物车成功', '', 'success');
+                        swal('加入购物车成功', '', 'success')
                             .then(function() {
                                 location.href = '{{ route('cart.index') }}';
                             });

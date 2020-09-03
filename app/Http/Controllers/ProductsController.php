@@ -8,6 +8,14 @@ use App\Models\Product;
 
 class ProductsController extends Controller
 {
+    /**
+     * Notes: 商品列表页面
+     * Created by PhpStorm.
+     * User: ChenYiWen
+     * DateTime: 2020/9/3 11:45
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View|\think\response\View
+     */
     public function index(Request $request)
     {
         // 创建一个查询构造器
@@ -51,6 +59,16 @@ class ProductsController extends Controller
         ]);
     }
 
+    /**
+     * Notes: 商品详情页
+     * Created by PhpStorm.
+     * User: ChenYiWen
+     * DateTime: 2020/9/3 11:45
+     * @param Product $product
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View|\think\response\View
+     * @throws InvalidRequestException
+     */
     public function show(Product $product, Request $request)
     {
         if (!$product->on_sale) {
@@ -68,6 +86,15 @@ class ProductsController extends Controller
         return view('products.show', ['product' => $product, 'favored' => $favored]);
     }
 
+    /**
+     * Notes: 商品收藏
+     * Created by PhpStorm.
+     * User: ChenYiWen
+     * DateTime: 2020/9/3 11:37
+     * @param Product $product
+     * @param Request $request
+     * @return array
+     */
     public function favor(Product $product, Request $request)
     {
         $user = $request->user();
@@ -80,10 +107,19 @@ class ProductsController extends Controller
         return [];
     }
 
+    /**
+     * Notes: 取消商品收藏
+     * Created by PhpStorm.
+     * User: ChenYiWen
+     * DateTime: 2020/9/3 11:36
+     * @param Product $product
+     * @param Request $request
+     * @return array
+     */
     public function disfavor(Product $product, Request $request)
     {
         $user = $request->user();
-        $user->favoriteProducts()->datach($product);
+        $user->favoriteProducts()->detach($product);
 
         return [];
     }
