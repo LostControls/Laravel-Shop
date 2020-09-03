@@ -3,10 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddCartRequest;
+use App\Models\ProductSku;
+use Illuminate\Http\Request;
 use App\Models\CartItem;
 
 class CartController extends Controller
 {
+    /**
+     * Notes: 购物车页面
+     * Created by PhpStorm.
+     * User: ChenYiWen
+     * DateTime: 2020/9/3 10:05
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View|\think\response\View
+     */
+    public function index(Request $request)
+    {
+        $cartItems = $request->user()->cartItems()->with(['productSku.product'])->get();
+
+        return view('cart.index', ['cartItems' => $cartItems]);
+    }
+
+    /**
+     * Notes: 添加商品到购物车
+     * Created by PhpStorm.
+     * User: ChenYiWen
+     * DateTime: 2020/9/3 10:05
+     * @param AddCartRequest $request
+     * @return array
+     */
     public function add(AddCartRequest $request)
     {
         $user   = $request->user();
@@ -28,6 +53,22 @@ class CartController extends Controller
             $cart->productSku()->associate($skuId);
             $cart->save();
         }
+
+        return [];
+    }
+
+    /**
+     * Notes: 移除购物车商品
+     * Created by PhpStorm.
+     * User: ChenYiWen
+     * DateTime: 2020/9/3 10:13
+     * @param ProductSku $sku
+     * @param Request $request
+     * @return array
+     */
+    public function remove(ProductSku $sku, Request $request)
+    {
+        $request->user()->cartItems()->where('product_sku_id',$sku->id)->delete();
 
         return [];
     }
