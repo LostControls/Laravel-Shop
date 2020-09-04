@@ -99,4 +99,19 @@ class OrdersController extends Controller
 
         return view('orders.index', ['orders' => $orders]);
     }
+
+    /**
+     * Notes: 订单详情页
+     * Created by PhpStorm.
+     * User: ChenYiWen
+     * DateTime: 2020/9/4 17:00
+     * @param Order $order
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View|\think\response\View
+     */
+    public function show(Order $order, Request $request)
+    {
+        $this->authorize('own', $order);
+        return view('orders.show', ['order' => $order->load(['items.productSku', 'items.product'])]);
+    }
 }
