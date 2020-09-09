@@ -1,9 +1,9 @@
 <?php
 return [
     'alipay' => [
-        'app_id'         => '2021000116690132',
-        'ali_public_key' => 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIgHnOn7LLILlKETd6BFRJ0GqgS2Y3mn1wMQmyh9zEyWlz5p1zrahRahbXAfCfSqshSNfqOmAQzSHRVjCqjsAw1jyqrXaPdKBmr90DIpIxmIyKXv4GGAkPyJ/6FTFY99uhpiq0qadD/uSzQsefWo0aTvP/65zi3eof7TcZ32oWpwIDAQAB',
-        'private_key'    => 'MIIEowIBAAKCAQEAht9JLSk/0T9O224txIePFzhu4XPI5D3K2k5OmQ2FWr3CacnbJWEe/HfWQ5+cQJjcwe2pQQIUMwmUxdqn3Nq7uGAmuhz57PQ2YEA/qQ8JNFmUzwb8wd0u8oFxVLzT2kPGF7fYWDjh/4BPfVZbUA/V8Z9GaqAqrYjf+lpiugB2KvYHQ54lXcDjNIaEjxIDRVo7ubAbdRgv+GRCcasnP/fA7Kqy7XJVj043LUh/NFnWFx0Sb4LMP5gWFS20Em1SHFBaoKL+R6G0uGI6Fw0q0pKQcYV1cIgPM7nmMMz38PZUoIBB5L23PZmp6NxsXDzeoITqfegtyDU2JuIWTQDt5Y5fFwIDAQABAoIBAAh+x/0wO/TSKAVqSze10i2EQHey81RtD/nwNMMvNtcgXL6NGGCiXXFJmxVnWFA5UK5maeLOXrdYQyazPx+KJ4jVhZrzeEqUl1g4s8nSSKIjglwH9KPBatObk6fivPVij3eu/NGRw6p0So16gwXn+XHetnDA5e9IT9NVHiLZJJhQD3sXQ58IXZ8SvYXQ341KdQ80+0n8Nb/45jsMXNZM2Svrt/xpGdtSKmiZb6bacpsPY1y3Drzn4Ki68eOXPNKcbu1bfF6pSIkj/b0gtxJbOy3Ay056k1njtRPB+t3fRlRk5s6RQqfVD6XetDKzyXq/fFxEc3mBLZ0F2gQwLt5XHwECgYEAvfAMvCYMwh/NilDz1lQ2OxvKgljJmQgJP1prweeVLxqF0jLDk8j7eY0xb3kXSiV2bHwbFsikw/GlidqYE/qTFnq3mfMyEy4Zh6wz6WDMzHTum2ZMe1Pinwt33SXv7i/lyH3FudtkvRAYP9ty8l9+QKXGx4gG1/ksACd1otWp2+MCgYEAtcg8KFS6SktGFny6niwOBvaTlTSl7IJMvGV5cxJTt/mH3EGPm8uH94AZhsiGbNe6l08Jui4bKWs/En61dxJIFeXFFVAd0gKPtlElZfeVTFwYRj12/8CkvMKph/MUB/LiNrTbI4R09RldWREpalxAw+f0w6YYGNUvskyZ/MQcPj0CgYA8lhrp1VVSguSEj2gIYRpfZnEFfR7pYqfYfpZK5v0uZk5zi1/Zf03AKyquvTiRnTuWRUw6y0vLeQRt4b2K+e37SK/SOsIpXhYksehpNEh/m3kVNt+Eo3BxfS4B6/0JxFuOxZfRvkr3B/BERlL3P0C9jGPI9/n+4GuJrQyYIYGqMwKBgGAe9yBkXPU4BGGTpqJIrUolTDiTVEFRTP45shSU1kvr2FkxGZzJ7KWEyPqqQdp/4BxuILif9KDcIsfG1HGX6yIZEzOH35zS2ecP1XSri/iKohNSIQBvfyyIylgmwqrJVbCTxWRsf+Oye9fC6WFiUqTEnHpv80H+SHBBbRNpJ34JAoGBALDpFTsF9KZE/sUmevpfL1N2oEwD4HMCZSVbmI2EkRS3fr+oCTcpkTRqDJ+r6n2W//5WXyAGwoydZhucWS+7oMfhaWmSyhCjCyxGdT0LdpdqB7fe17du6HT7j1VuJP4GOfyq18KAS1klxQ0x1aYIWKEryPTINh5cyHzEgTWQKtpC',
+        'app_id'         => env('ALIPAY_APP_ID',''),
+        'ali_public_key' => env('ALI_PUBLIC_KEY',''),
+        'private_key'    => env('PRIVATE_KEY',''),
         'log'            => [
             'file' => storage_path('logs/alipay.log'),
         ],
@@ -11,11 +11,11 @@ return [
     ],
 
     'wechat' => [
-        'app_id'      => '',
-        'mch_id'      => '',
-        'key'         => '',
-        'cert_client' => '',
-        'cert_key'    => '',
+        'app_id'      => env('WECHAT_APP_ID',''),   // 公众号 app id
+        'mch_id'      => env('WECHAT_MCH_ID',''),  // 第一步获取到的商户号
+        'key'         => env('WECHAT_KEY',''),    // 刚刚设置的 API 密钥
+        'cert_client' => resource_path('wechat_pay/apiclient_cert.pem'),
+        'cert_key'    => resource_path('wechat_pay/apiclient_key.pem'),
         'log'         => [
             'file' => storage_path('logs/wechat_pay.log'),
         ],
