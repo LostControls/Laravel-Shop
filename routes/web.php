@@ -79,6 +79,9 @@ Route::group(['middleware' => ['auth','verified']], function () {
 
     // 前端回调地址
     Route::get('payment/alipay/return', 'PaymentController@alipayReturn')->name('payment.alipay.return');
+
+    // 确认收货
+    Route::post('orders/{order}/received', 'OrdersController@received')->name('orders.received');
 });
 
 // 服务器端回调地址
