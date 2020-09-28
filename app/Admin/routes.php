@@ -29,4 +29,12 @@ Route::group([
     $router->post('orders/{order}/refund', 'OrdersController@handleRefund')->name('admin.orders.handle_refund');
 
     $router->get('coupon_codes', 'CouponCodesController@index');
+    $router->post('coupon_codes', 'CouponCodesController@store');
+    $router->get('coupon_codes/create', 'CouponCodesController@create');
+
+    // 修改优惠券
+    $router->get('coupon_codes/{id}/edit', 'CouponCodesController@edit');
+    $router->put('coupon_codes/{id}', 'CouponCodesController@update');
+    // 删除优惠券
+    $router->delete('coupon_codes/{id}', 'CouponCodesController@destroy');
 });
