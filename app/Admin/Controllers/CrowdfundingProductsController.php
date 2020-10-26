@@ -18,7 +18,7 @@ class CrowdfundingProductsController extends AdminController
         $grid = new Grid(new Product);
 
         // 只展示 type 为众筹类型的商品
-        $grid->model()->where('type', Product::TYPE_CROWDFUNDING);
+        $grid->model()->where('type', Product::TYPE_CROWDFUNDING)->with(['category']);
         $grid->id('ID')->sortable();
         $grid->title('商品名称');
         $grid->on_sale('已上架')->display(function ($value) {
@@ -51,7 +51,7 @@ class CrowdfundingProductsController extends AdminController
         $form = new Form(new Product);
 
         // 在表单中添加一个名为 type，值为 Product::TYPE_CROWDFUNDING 的隐藏字段
-        $form->hidden('type')->value(Product::TYPE_CROWDFUNDING);
+        $form->hidden('type')->value(Product::TYPE_NORMAL);
         $form->text('title', '商品名称')->rules('required');
         $form->select('category_id', '类目')->options(function ($id) {
             $category = Category::find($id);
