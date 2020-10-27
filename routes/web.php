@@ -93,6 +93,9 @@ Route::group(['middleware' => ['auth','verified']], function () {
 
     // 检查优惠券
     Route::get('coupon_codes/{code}', 'CouponCodesController@show')->name('coupon_codes.show');
+
+    // 众筹
+    Route::post('crowdfunding_orders','OrdersController@crowdfunding')->name('crowdfunding_orders.store');
 });
 
 // 服务器端回调地址
