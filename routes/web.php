@@ -105,6 +105,10 @@ Route::group(['middleware' => ['auth','verified']], function () {
 
     // 分期详情页
     Route::get('installments/{installment}', 'InstallmentsController@show')->name('installments.show');
+
+    // 分期还款(支付宝)
+    Route::get('installments/{installment}/alipay', 'InstallmentsController@payByAlipay')->name('installments.alipay');
+    Route::get('installments/alipay/return', 'InstallmentsController@alipayReturn')->name('installments.alipay.return');
 });
 
 // 服务器端回调地址
@@ -115,4 +119,6 @@ Route::post('payment/wechat/notify', 'PaymentController@wechatNotify')->name('pa
 // 退款回调路由
 Route::post('payment/wechat/refund_notify', 'PaymentController@wechatRefundNotify')->name('payment.wechat.refund_notify');
 
+// 后端回调不能放在 auth 中间件中
+Route::post('installments/alipay/notify', 'InstallmentsController@alipayNotify')->name('installments.alipay.notify');
 
