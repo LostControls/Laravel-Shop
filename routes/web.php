@@ -99,6 +99,9 @@ Route::group(['middleware' => ['auth','verified']], function () {
 
     // 分期付款
     Route::post('payment/{order}/installment', 'PaymentController@payByInstallment')->name('payment.installment');
+
+    // 分期付款列表页
+    Route::get('installments', 'InstallmentsController@index')->name('installments.index');
 });
 
 // 服务器端回调地址
