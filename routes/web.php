@@ -109,7 +109,12 @@ Route::group(['middleware' => ['auth','verified']], function () {
     // 分期还款(支付宝)
     Route::get('installments/{installment}/alipay', 'InstallmentsController@payByAlipay')->name('installments.alipay');
     Route::get('installments/alipay/return', 'InstallmentsController@alipayReturn')->name('installments.alipay.return');
+
+    // 分期还款（微信）
+    Route::get('installments/{installment}/wechat', 'InstallmentsController@payByWechat')->name('installments.wechat');
 });
+
+Route::post('installments/wechat/notify', 'InstallmentsController@wechatNotify')->name('installments.wechat.notify');
 
 // 服务器端回调地址
 Route::post('payment/alipay/notify', 'PaymentController@alipayNotify')->name('payment.alipay.notify');
