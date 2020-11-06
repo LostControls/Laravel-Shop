@@ -112,6 +112,9 @@ Route::group(['middleware' => ['auth','verified']], function () {
 
     // 分期还款（微信）
     Route::get('installments/{installment}/wechat', 'InstallmentsController@payByWechat')->name('installments.wechat');
+
+    // 秒杀下单
+    Route::post('seckill_orders','OrdersController@seckill')->name('seckill_orders.store');
 });
 
 Route::post('installments/wechat/notify', 'InstallmentsController@wechatNotify')->name('installments.wechat.notify');
